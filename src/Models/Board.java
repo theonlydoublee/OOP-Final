@@ -12,33 +12,7 @@ public class Board extends Prompts{
 
     private String[][] boardData = new String[height][width];
     
-    public void setHeight(int height) {
-        this.height = height;
-    }
-    
-    public int getConnect() {
-        return connect;
-    }
-    
-    public void setConnect(int connect) {
-        this.connect = connect;
-    }
-    
-    public int getHeight() {
-        return height;
-    }
-    
-    public int getWidth() {
-        return width;
-    }
-    
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
     private void setDefaultBoardData(){
-        //boardData = new String[height][width];
-        
         for (String[] boardDatum : boardData) {
             Arrays.fill(boardDatum, "◍");
         }
