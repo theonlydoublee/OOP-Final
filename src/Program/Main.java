@@ -6,7 +6,5 @@ public class Main {
 
     public static void main(String[] args) {
         new Connect4().run();
-    
-        System.out.println("not a donut");
     }
 }
