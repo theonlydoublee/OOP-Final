@@ -1,12 +1,14 @@
 package Program;
 
-public class Main {
+import Connect4.Connect4;
 
-    public static void main(String[] args) {
+public class Main {
     
+    public static void main(String[] args) {
+        
         //add menu and player creation
         //also stat tracker
-    
-        Play.Connect4.run("1", "2");
+        
+        Connect4.run("1", "2");
     }
 }
