@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Connect4" level="project" />
+    <orderEntry type="library" exported="" name="ConsoleIO" level="project" />
   </component>
 </module>
