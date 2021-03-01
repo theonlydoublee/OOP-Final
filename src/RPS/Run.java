@@ -4,7 +4,6 @@ import Program.Player;
 
 import static lib.ConsoleIO.promptForInt;
 
-
 public class Run {
     
     public static int menu(Player playerOne, Player playerTwo) {
