@@ -3,7 +3,6 @@ import java.util.Random;
 
 public class TicTacToeBoard {
     
-    
     private final Random random = new Random();
     char[][] char2darray = new char[3][3];
     String input;
