@@ -23,7 +23,7 @@ public class Main {
     
         int winner = 0;
     
-        String[] menu = {"Connect 4", "Rock Paper Scissors", "Tic-Tac-Toe", "Exit"};
+        String[] menu = {"Connect 4", "Rock Paper Scissors", "TTT", "Exit"};
     
         do {
             winner = 0;
