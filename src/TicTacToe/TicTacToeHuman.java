@@ -1,14 +1,16 @@
-public class TicTacToeHuman extends TicTacToePlayer{
+package TicTacToe;
+
+public class TicTacToeHuman extends TicTacToePlayer {
     @Override
     public String getName() {
         return super.getName();
     }
-
+    
     @Override
     public void setName(String name) {
         super.setName(name);
     }
-
+    
     @Override
     public int[] moveChoice() {
         int colPlacement = TicTacToeMenu.promptForInt("Select which column you'd like to place your piece: ",1, 3);

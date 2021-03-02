@@ -2,6 +2,7 @@ package Program;
 
 import Connect4.Connect4;
 import RPS.Run;
+import TicTacToe.TicTacToeBoard;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -71,6 +72,13 @@ public class Main {
                             "      \\ \\  \\ \\ \\  \\ \\  \\___\\|____________|   \\ \\  \\ \\ \\  \\ \\  \\ \\  \\___\\|____________|   \\ \\  \\ \\ \\  \\\\\\  \\ \\  \\_|\\ \\ \n" +
                             "       \\ \\__\\ \\ \\__\\ \\_______\\                \\ \\__\\ \\ \\__\\ \\__\\ \\_______\\                \\ \\__\\ \\ \\_______\\ \\_______\\\n" +
                             "        \\|__|  \\|__|\\|_______|                 \\|__|  \\|__|\\|__|\\|_______|                 \\|__|  \\|_______|\\|_______|\n");
+        
+        
+                    try {
+                        TicTacToeBoard.runTTT();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     winner = 0;
                     break;
                 case 3:
