@@ -5,26 +5,26 @@ public class TicTacToeBoard {
     
     
     private final Random random = new Random();
-        char[][] char2darray = new char[3][3];
-        String input;
-        int userChoice = -1;
-        TicTacToePlayer player1;
-        TicTacToePlayer player2;
-        boolean a = false;
-        boolean b = false;
-        boolean c = false;
-        
-        public int randomNum() {
-            return random.nextInt(2);
-        }
-        
-        public void clearBoard() {
-            char2darray = new char[3][3];
-        }
-        
-        public void print2DArray(char[][] charCollection) {
-            for (int row = 0; row < charCollection.length; row++) {
-                for (int col = 0; col < charCollection[row].length; col++) {
+    char[][] char2darray = new char[3][3];
+    String input;
+    int userChoice = -1;
+    TicTacToePlayer player1;
+    TicTacToePlayer player2;
+    boolean a = false;
+    boolean b = false;
+    boolean c = false;
+    
+    public int randomNum() {
+        return random.nextInt(2);
+    }
+    
+    public void clearBoard() {
+        char2darray = new char[3][3];
+    }
+    
+    public void print2DArray(char[][] charCollection) {
+        for (int row = 0; row < charCollection.length; row++) {
+            for (int col = 0; col < charCollection[row].length; col++) {
                     System.out.print(" | ");
                     if (charCollection[row][col] == 0) {
                         System.out.print(" * ");
