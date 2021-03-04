@@ -19,6 +19,10 @@ public class Player {
         this.color = color;
     }
     
+    public String getColor() {
+        return color;
+    }
+    
     public String getName() {
         return this.color + this.name + "\u001b[0m";
     }

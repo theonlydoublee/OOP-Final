@@ -10,11 +10,10 @@ import static lib.ConsoleIO.promptForMenuSelection;
 
 public class Play {
     public static int play(Player playerOne, Player playerTwo) {
-        String[] choices = {"Rock", "Paper", "Scissors"};
-        
+        String[] choices = {"Rock", "Paper", "Scissors", "Spock", "Lizard"};
+    
         playerOne.setChip(choices[promptForMenuSelection(choices, false)]);
-        
-        
+        System.out.println(playerOne.getChip());
         if (!playerTwo.isComputer())
             playerTwo.setChip(choices[promptForMenuSelection(choices, false)]);
         else {
@@ -36,37 +35,86 @@ public class Play {
         
         switch (playerOneChoice) {
             case "Rock":
-                if (playerTwoChoice.equals("Paper")) {
-                    System.out.println("Paper covers rock\n" + playerTwo.getName() + " wins");
-                    return 2;
-                } else if (playerTwoChoice.equals("Scissors")) {
-                    System.out.println("Rock crushes scissors\n" + playerOne.getName() + " wins");
-                    return 1;
+                switch (playerTwoChoice) {
+                    case "Paper":
+                        System.out.println("Paper covers rock\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Scissors":
+                        System.out.println("Rock crushes scissors\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Spock":
+                        System.out.println("Spock vaporizes rock\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Lizard":
+                        System.out.println("Rock crushes lizard\n" + playerOne.getName() + " wins");
+                        return 1;
                 }
                 break;
             case "Paper":
-                if (playerTwoChoice.equals("Rock")) {
-                    System.out.println("Paper covers rock\n" + playerOne.getName() + " wins");
-                    return 1;
-                }
-                if (playerTwoChoice.equals("Scissors")) {
-                    System.out.println("Rock crushes scissors\n" + playerTwo.getName() + " wins");
-                    return 2;
+                switch (playerTwoChoice) {
+                    case "Rock":
+                        System.out.println("Paper covers rock\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Scissors":
+                        System.out.println("Scissors cuts paper\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Spock":
+                        System.out.println("Paper disproves Spock\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Lizard":
+                        System.out.println("Lizard eats paper\n" + playerTwo.getName() + " wins");
+                        return 2;
                 }
                 break;
             case "Scissors":
-                if (playerTwoChoice.equals("Rock")) {
-                    System.out.println("Rock crushes scissors\n" + playerOne.getName() + " wins");
-                    return 2;
+                switch (playerTwoChoice) {
+                    case "Rock":
+                        System.out.println("Rock crushes scissors\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Paper":
+                        System.out.println("Scissors cut paper\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Spock":
+                        System.out.println("Spock smashes scissors\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Lizard":
+                        System.out.println("Scissors decapitates lizard\n" + playerOne.getName() + " wins");
+                        return 1;
                 }
-                if (playerTwoChoice.equals("Paper")) {
-                    System.out.println("Scissors cut paper\n" + playerOne.getName() + " wins");
-                    return 1;
+                break;
+            case "Spock":
+                switch (playerTwoChoice) {
+                    case "Rock":
+                        System.out.println("Spock vaporizes rock\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Paper":
+                        System.out.println("Paper disproves Spock\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Scissors":
+                        System.out.println("Spock smashes scissors\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Lizard":
+                        System.out.println("Lizard poisons Spock\n" + playerTwo.getName() + " wins");
+                        return 2;
+                }
+                break;
+            case "Lizard":
+                switch (playerTwoChoice) {
+                    case "Rock":
+                        System.out.println("Rock crushes lizard\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Paper":
+                        System.out.println("Lizard eats paper\n" + playerOne.getName() + " wins");
+                        return 1;
+                    case "Scissors":
+                        System.out.println("Scissors decapitates lizard\n" + playerTwo.getName() + " wins");
+                        return 2;
+                    case "Spock":
+                        System.out.println("Lizard poisons Spock\n" + playerOne.getName() + " wins");
+                        return 1;
                 }
                 break;
         }
-        
-        
         return 0;
     }
     
@@ -88,6 +136,12 @@ public class Play {
                     case "Scissors":
                         one = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(15 + i);
                         break;
+                    case "Spock":
+                        one = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(45 + i);
+                        break;
+                    case "Lizard":
+                        one = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(52 + i);
+                        break;
                 }
                 switch (playerTwo.getChip()) {
                     case "Rock":
@@ -99,8 +153,14 @@ public class Play {
                     case "Scissors":
                         two = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(37 + i);
                         break;
+                    case "Spock":
+                        two = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(45 + i);
+                        break;
+                    case "Lizard":
+                        two = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(52 + i);
+                        break;
                 }
-                System.out.printf("%-25s%-25s\n", one, two);
+                System.out.printf("%-40s%-40s\n", one, two);
                 
                 
             } catch (IOException ioException) {

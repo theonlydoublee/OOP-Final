@@ -35,15 +35,11 @@ public class Board {
         Player currentPlayer;
         if (startingPlayer == 0) {
             currentPlayer = player1;
-            player1.setColor("\u001b[0;33m");
             player1.setChip("◎");
-            player2.setColor("\u001b[0;31m");
             player2.setChip("◉");
         } else {
             currentPlayer = player2;
-            player2.setColor("\u001b[0;33m");
             player2.setChip("◎");
-            player1.setColor("\u001b[0;31m");
             player1.setChip("◉");
         }
         
@@ -55,6 +51,8 @@ public class Board {
                 int playRow = 0;
                 this.printBoardData();
                 int play;
+    
+    
                 if (!currentPlayer.isComputer()) {
                     int var10001 = this.width;
                     String var10002 = currentPlayer.getName();
@@ -63,7 +61,8 @@ public class Board {
                     System.out.println(currentPlayer.getName() + " the computer played");
                     play = this.genRandom(this.width);
                 }
-                
+    
+    
                 for (int row = this.boardData.length - 1; row >= 0; --row) {
                     if (this.boardData[row][play].equals("◍")) {
                         this.boardData[row][play] = currentPlayer.getChip();
@@ -80,11 +79,11 @@ public class Board {
                 if (this.checkWin(currentPlayer.getChip(), playRow, play)) {
                     System.out.printf("\n\nWinner is %s", currentPlayer.getName());
                     this.printBoardData();
-                    if (turn % 2 == 1) {
+                    if (currentPlayer == player1) {
                         return 1;
+                    } else {
+                        return 2;
                     }
-                    
-                    return 2;
                 }
                 
                 if (currentPlayer == player1) {

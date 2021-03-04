@@ -1,5 +1,7 @@
 package TicTacToe;
 
+import Program.Player;
+
 import java.io.IOException;
 import java.util.Random;
 
@@ -9,8 +11,8 @@ public class TicTacToeBoard {
     static char[][] char2darray = new char[3][3];
     String input;
     static int userChoice = -1;
-    static TicTacToePlayer player1;
-    static TicTacToePlayer player2;
+    static Player player1;
+    static Player player2;
     static boolean a = false;
     static boolean b = false;
     static boolean c = false;
@@ -196,20 +198,22 @@ public class TicTacToeBoard {
     }
     
     public static void placePiece(int[] rowCol, char winPiece) {
+    
         if (rowCol[0] == -1 || rowCol[0] == -2 || rowCol[1] == -1 || rowCol[1] == -2) {
             throw new IllegalArgumentException("This selection is full, choose another.");
         } else {
             char2darray[rowCol[0]][rowCol[1]] = winPiece;
         }
+    
     }
     
-    public static void HumanVsHuman() {
+    public static int HumanVsHuman() {
         clearBoard();
         do {
             do {
                 try {
                     print2DArray(char2darray);
-                    int[] pC = player1.moveChoice();
+                    int[] pC = humanMoveChoice();
                     placePiece(pC, 'X');
                     a = checkForEachWin('X');
                     c = false;
@@ -222,7 +226,7 @@ public class TicTacToeBoard {
                 do {
                     try {
                         print2DArray(char2darray);
-                        int[] pC2 = player2.moveChoice();
+                        int[] pC2 = humanMoveChoice();
                         placePiece(pC2, 'O');
                         b = checkForEachWin('O');
                         c = false;
@@ -235,13 +239,20 @@ public class TicTacToeBoard {
         } while (!a && !b);
         if (a) {
             TicTacToeMenu.printMessage(player1.getName() + " won!");
+            print2DArray(char2darray);
+            return 1;
         }
         if (b) {
             TicTacToeMenu.printMessage(player2.getName() + " won!");
+            print2DArray(char2darray);
+            return 2;
         }
+        print2DArray(char2darray);
+        return 0;
+        
     }
     
-    public static void HumanVsComputer() {
+    public static int HumanVsComputer() {
         clearBoard();
         boolean player1First = (randomNum() == 0);
         char player1Char;
@@ -260,7 +271,7 @@ public class TicTacToeBoard {
                 try {
                     if (player1First) {
                         print2DArray(char2darray);
-                        int[] pC = player1.moveChoice();
+                        int[] pC = humanMoveChoice();
                         placePiece(pC, player1Char);
                         a = checkForEachWin(player1Char);
                         c = false;
@@ -275,7 +286,7 @@ public class TicTacToeBoard {
             if (!a) {
                 do {
                     try {
-                        int[] pC2 = player2.moveChoice();
+                        int[] pC2 = compMoveChoice();
                         placePiece(pC2, player2Char);
                         b = checkForEachWin(player2Char);
                         System.out.println(player2.getName() + (pC2[0] + 1));
@@ -289,22 +300,28 @@ public class TicTacToeBoard {
         } while (!a && !b);
         if (a) {
             TicTacToeMenu.printMessage(player1.getName() + " won!");
+            print2DArray(char2darray);
+            return 1;
         }
         if (b) {
             TicTacToeMenu.printMessage(player2.getName() + " won!");
+            print2DArray(char2darray);
+            return 2;
         }
+        print2DArray(char2darray);
+        return 0;
     }
     
-    public static void ComputerVsComputer() {
+    public static int ComputerVsComputer() {
         clearBoard();
         do {
             do {
                 try {
                     print2DArray(char2darray);
-                    int[] pC = player1.moveChoice();
+                    int[] pC = compMoveChoice();
                     placePiece(pC, 'X');
                     a = checkForEachWin('X');
-                    System.out.println(player1.getName() + " placed a piece in column: " + (pC[0] + 1));
+                    System.out.println(player1.getName() + " placed a piece in row: " + (pC[0] + 1));
                     c = false;
                 } catch (IllegalArgumentException iae) {
                     TicTacToeMenu.printMessage(iae.getMessage());
@@ -315,7 +332,7 @@ public class TicTacToeBoard {
                 do {
                     try {
                         print2DArray(char2darray);
-                        int[] pC2 = player2.moveChoice();
+                        int[] pC2 = compMoveChoice();
                         placePiece(pC2, 'O');
                         b = checkForEachWin('O');
                         System.out.println(player2.getName() + " placed a piece in column: " + (pC2[0] + 1));
@@ -329,62 +346,99 @@ public class TicTacToeBoard {
         } while (!a && !b);
         if (a) {
             TicTacToeMenu.printMessage(player1.getName() + " won!");
+            print2DArray(char2darray);
+            return 1;
         }
         if (b) {
             TicTacToeMenu.printMessage(player2.getName() + " won!");
+            print2DArray(char2darray);
+            return 2;
         }
+        
+        print2DArray(char2darray);
+        return 0;
     }
     
-    public static void runTTT() throws IOException {
+    public static int runTTT(Player playerOne, Player playerTwo) throws IOException {
+        player1 = playerOne;
+        player2 = playerTwo;
+        
+        
+        tic:
         do {
             userChoice = new TicTacToeMenu().InterfaceMenu();
-            String player1Name = TicTacToeMenu.promptForString("Input your name: ");
-            String player2Name = TicTacToeMenu.promptForString("Input your name: ");
             clearBoard();
             print2DArray(char2darray);
             switch (userChoice) {
                 case 1:
-                    player1 = new TicTacToeHuman();
-                    player2 = new TicTacToeHuman();
+//                    playerOne = new TicTacToeHuman();
+//                    playerTwo = new TicTacToeHuman();
                     if (randomNum() == 0) {
-                        player1.setName(player1Name);
-                        player2.setName(player2Name);
-                        System.out.println(player1.getName() + " is going first: ");
+//                        playerOne.setName(player1Name);
+//                        playerTwo.setName(player2Name);
+                        System.out.println(playerOne.getName() + " is going first: ");
                     } else {
-                        player1.setName(player2Name);
-                        player2.setName(player1Name);
-                        System.out.println(player1.getName() + " is going first: ");
+//                        playerOne.setName(player2Name);
+//                        playerTwo.setName(player1Name);
+                        System.out.println(playerOne.getName() + " is going first: ");
                     }
                     //^^ check for a value and if true assign a player with a piece
-                    HumanVsHuman();
-                    break;
+                    return HumanVsHuman();
                 case 2:
-                    player1 = new TicTacToeHuman();
-                    player2 = new TicTacToeComputer();
-                    player1.setName(player1Name);
-                    player2.setName(player2Name);
+//                    playerOne = new TicTacToeHuman();
+//                    playerTwo = new TicTacToeComputer();
+//                    playerOne.setName(player1Name);
+//                    playerTwo.setName(player2Name);
                     
-                    HumanVsComputer();
-                    break;
+                    return HumanVsComputer();
                 case 3:
-                    player1 = new TicTacToeComputer();
-                    player2 = new TicTacToeComputer();
+//                    playerOne = new TicTacToeComputer();
+//                    playerTwo = new TicTacToeComputer();
                     if (randomNum() == 0) {
-                        player1.setName(player1Name);
-                        player2.setName(player2Name);
-                        System.out.println(player1.getName() + " is going first: ");
+//                        playerOne.setName(player1Name);
+//                        playerTwo.setName(player2Name);
+                        System.out.println(playerOne.getName() + " is going first: ");
                     } else {
-                        player1.setName(player2Name);
-                        player2.setName(player1Name);
-                        System.out.println(player2.getName() + " is going first: ");
+//                        playerOne.setName(player2Name);
+//                        playerTwo.setName(player1Name);
+                        System.out.println(playerTwo.getName() + " is going first: ");
                     }
                     
-                    ComputerVsComputer();
-                    break;
+                    return ComputerVsComputer();
                 case 4:
-                    break;
+                    break tic;
             }
-        } while (userChoice != 4);
+        } while (true);
+        return 0;
+    }
+    
+    private static int[] compMoveChoice() {
+        do {
+            int colPlacement = random.nextInt(3);
+            int rowPlacement = random.nextInt(3);
+            
+            if (char2darray[rowPlacement][colPlacement] == 0) {
+                return new int[]{rowPlacement, colPlacement};
+            } else {
+                System.out.println("\n\tChoosing unused zipcode");
+                print2DArray(char2darray);
+            }
+        } while (true);
+    }
+    
+    private static int[] humanMoveChoice() {
+        do {
+            int colPlacement = TicTacToeMenu.promptForInt("Select which column you'd like to place your piece: ", 1, 3) - 1;
+            int rowPlacement = TicTacToeMenu.promptForInt("Select which row you'd like to place your piece in: ", 1, 3) - 1;
+            
+            if (char2darray[rowPlacement][colPlacement] == 0) {
+                return new int[]{rowPlacement, colPlacement};
+            } else {
+                System.out.println("\n\tSpot is taken, choose a new zipcode");
+                print2DArray(char2darray);
+            }
+            
+        } while (true);
     }
 }
 
