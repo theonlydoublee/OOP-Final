@@ -14,6 +14,8 @@ import static lib.ConsoleIO.promptForString;
 public class Main {
     
     public static void main(String[] args) {
+        int randomColor;
+    
         String resetColor = "\033[0m";
         String[] colors = {resetColor + "\033[0;30mBlack" + resetColor, resetColor + "\033[0;31mRed" + resetColor, resetColor + "\033[0;32mGreen" + resetColor, resetColor + "\033[0;33mYellow" + resetColor, resetColor + "\033[0;34mBlue" + resetColor, resetColor + "\033[0;35mPink" + resetColor, resetColor + "\033[0;36mCyan" + resetColor, resetColor + "\033[0;37mGrey" + resetColor};
     
@@ -39,13 +41,19 @@ public class Main {
             System.out.println("\n\nWhat Game do you want to play?");
             switch (promptForMenuSelection(menu, true)) {
                 case 0:
-                    System.out.println("\n ________  ________  ________   ________   _______   ________ _________        ___   ___     \n" +
-                            "|\\   ____\\|\\   __  \\|\\   ___  \\|\\   ___  \\|\\  ___ \\ |\\   ____\\\\___   ___\\     |\\  \\ |\\  \\    \n" +
-                            "\\ \\  \\___|\\ \\  \\|\\  \\ \\  \\\\ \\  \\ \\  \\\\ \\  \\ \\   __/|\\ \\  \\___\\|___ \\  \\_|     \\ \\  \\\\_\\  \\   \n" +
-                            " \\ \\  \\    \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\\\ \\  \\ \\  \\_|/_\\ \\  \\       \\ \\  \\       \\ \\______  \\  \n" +
-                            "  \\ \\  \\____\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\\\ \\  \\ \\  \\_|\\ \\ \\  \\____   \\ \\  \\       \\|_____|\\  \\ \n" +
-                            "   \\ \\_______\\ \\_______\\ \\__\\\\ \\__\\ \\__\\\\ \\__\\ \\_______\\ \\_______\\  \\ \\__\\             \\ \\__\\\n" +
-                            "    \\|_______|\\|_______|\\|__| \\|__|\\|__| \\|__|\\|_______|\\|_______|   \\|__|              \\|__|\n");
+                    String connect = null;
+                    randomColor = (int) (Math.random() * (8 - 1 + 1)) + 1;
+                    System.out.println(setColor(randomColor));
+                    for (int i = 0; i < 7; i++) {
+                        try {
+                            connect = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(59 + i);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        System.out.printf("%-25s\n", connect);
+            
+                    }
+                    System.out.println("\033[0m");
                     winner = Connect4.run(playerOne, playerTwo);
                     break;
                 case 1:
@@ -54,6 +62,8 @@ public class Main {
                     String scissors = null;
                     String spock = null;
                     String steven = null;
+                    randomColor = (int) (Math.random() * (8 - 1 + 1)) + 1;
+                    System.out.println(setColor(randomColor));
                     for (int i = 0; i < 6; i++) {
                         try {
                             rock = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(1 + i);
@@ -67,20 +77,27 @@ public class Main {
             
             
                         System.out.printf("%-25s%-25s%-25s%-25s%-25s\n", rock, paper, scissors, spock, steven);
-                    
+            
                     }
+                    System.out.println("\033[0m");
                     winner = Run.menu(playerOne, playerTwo);
                     break;
                 case 2:
-                    System.out.println("\n _________  ___  ________               _________  ________  ________               _________  ________  _______      \n" +
-                            "|\\___   ___\\\\  \\|\\   ____\\             |\\___   ___\\\\   __  \\|\\   ____\\             |\\___   ___\\\\   __  \\|\\  ___ \\     \n" +
-                            "\\|___ \\  \\_\\ \\  \\ \\  \\___|  ___________\\|___ \\  \\_\\ \\  \\|\\  \\ \\  \\___|  ___________\\|___ \\  \\_\\ \\  \\|\\  \\ \\   __/|    \n" +
-                            "     \\ \\  \\ \\ \\  \\ \\  \\    |\\____________\\  \\ \\  \\ \\ \\   __  \\ \\  \\    |\\____________\\  \\ \\  \\ \\ \\  \\\\\\  \\ \\  \\_|/__  \n" +
-                            "      \\ \\  \\ \\ \\  \\ \\  \\___\\|____________|   \\ \\  \\ \\ \\  \\ \\  \\ \\  \\___\\|____________|   \\ \\  \\ \\ \\  \\\\\\  \\ \\  \\_|\\ \\ \n" +
-                            "       \\ \\__\\ \\ \\__\\ \\_______\\                \\ \\__\\ \\ \\__\\ \\__\\ \\_______\\                \\ \\__\\ \\ \\_______\\ \\_______\\\n" +
-                            "        \\|__|  \\|__|\\|_______|                 \\|__|  \\|__|\\|__|\\|_______|                 \\|__|  \\|_______|\\|_______|\n");
-    
-    
+                    String ticTac = null;
+                    randomColor = (int) (Math.random() * (8 - 1 + 1)) + 1;
+                    System.out.println(setColor(randomColor));
+                    for (int i = 0; i < 7; i++) {
+                        try {
+                            ticTac = Files.readAllLines(Paths.get("src/RPS/art.txt")).get(68 + i);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        System.out.printf("%-25s\n", ticTac);
+            
+                    }
+        
+                    System.out.println("\033[0m");
+        
                     try {
                         winner = TicTacToeBoard.runTTT(playerOne, playerTwo);
                     } catch (IOException ioException) {
